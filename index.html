@@ -23,7 +23,7 @@
         <summary>Description</summary>
         <div>
             <p>This page allows you to invert a regular expression, generating all strings that match it.</p>
-            <p><strong>Instructions:</strong> Enter a regular expression in the "Regex" field and specify the maximum number of results you want to see. Click "Invert" or press Enter to generate the matching strings.</p>
+            <p><strong>Instructions:</strong> Enter a regular expression in the "Regex" field and specify the maximum number of results you want to see (up to 100,000,000). Click "Invert" or press Enter to generate the matching strings.</p>
             <p><strong>Constraints:</strong></p>
             <ul>
                 <li>Unbounded repetition operators <code>+</code> and <code>*</code> are <strong>not supported</strong>.</li>
@@ -132,6 +132,9 @@
                 max_results = int(document.querySelector("#max-results").value)
             except ValueError:
                 max_results = 200
+            if max_results  > 100_000_000:
+                max_results = 100_000_000
+                document.querySelector("#max-results").value = 100_000_000
 
             output_area = document.querySelector("#output")
             status_div = document.querySelector("#status")
